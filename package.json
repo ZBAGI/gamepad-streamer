@@ -1,0 +1,42 @@
+{
+	"name": "gamepad-streamer",
+	"version": "1.0.0",
+	"description": "gamepad-streamer",
+	"bin": "./dist/server.js",
+	"pkg": {
+		"targets": [
+			"latest-linux-x64",
+			"latest-macos-x64",
+			"latest-win-x64"
+		],
+		"outputPath": "./dist/release"
+	},
+	"scripts": {
+		"release": "npm run build && pkg . && cp -r ./dist/templates ./dist/release && cp ./dist/index.html ./dist/release",
+		"serve": "nodemon",
+		"build": "tsc && cp -r ./src/templates ./dist && cp ./src/index.html ./dist"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ZBAGI/gamepad-streamer.git"
+	},
+	"author": "ZBAGI",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/ZBAGI/gamepad-streamer/issues"
+	},
+	"homepage": "https://github.com/ZBAGI/gamepad-streamer#readme",
+	"devDependencies": {
+		"@types/express": "^4.17.21",
+		"@types/node": "^20.11.19",
+		"@types/ws": "^8.5.10",
+		"nodemon": "^3.0.3",
+		"pkg": "^5.8.1",
+		"typescript": "^5.3.3"
+	},
+	"dependencies": {
+		"axios": "^1.6.8",
+		"express": "^4.19.0",
+		"socket.io": "^4.7.5"
+	}
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="socket.io/socket.io.js"></script>
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const loadingElement = document.getElementById('loading');
+		const templatesSelect = document.getElementById('templates');
+		const gamepadSelect = document.getElementById('gamepads');
+		const urlInput = document.getElementById('url');
+
+		const socket = io();
+		socket.on("info", (state) => {
+			templatesSelect.innerHTML = "";
+			gamepadSelect.innerHTML = "";
+
+			state.templates.forEach((template) => {
+				const option = new Option(template, template);
+				templatesSelect.appendChild(option);
+			});
+
+			state.gamepads.forEach((gamepad) => {
+				const option = new Option(gamepad, gamepad);
+				gamepadSelect.appendChild(option);
+			});
+
+			updateUrl();
+			loadingElement.style.display = 'none';
+		});
+
+		function updateUrl() {
+			const baseUrl = window.location.href.split('?')[0];
+			const newUrl = `${baseUrl}${templatesSelect.value}?gamepad=${gamepadSelect.value}`;
+			urlInput.value = newUrl;
+		}
+
+		templatesSelect.addEventListener('change', updateUrl);
+		gamepadSelect.addEventListener('change', updateUrl);
+	});
+</script>
+<style>
+	body {
+		background-color: #1f212a;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+		margin: 0;
+		color: #ddd;
+	}
+	.panel {
+		background-color: #2b2e38;
+		width: 400px;
+		border-radius: 10px;
+		padding: 20px;
+		position:relative;
+	}
+	.button, input, select {
+		background-color: #3c404b;
+		color: white;
+		padding: 10px;
+		margin: 5px 0;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		width: 100%;
+		box-sizing: border-box;
+	}
+	select {
+		margin-bottom: 20px;
+	}
+	input {
+		cursor: text;
+		border: 1px solid;
+		border-color: #81858f;
+	}
+	.button:hover {
+		background-color: #4f535e;
+	}
+	.header1 {
+		font-size: 200%;
+		margin-bottom: 20px;
+		text-align: center;
+	}
+	#loading {
+		background-color: #2b2e38e0;
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.menu {
+		position:relative;
+	}
+	.loader {
+		border: 8px solid #57585ead;
+		border-top: 8px solid #81858f;
+		border-radius: 50%;
+		width: 50px;
+		height: 50px;
+		animation: spin 2s linear infinite;
+	}
+
+	@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
+
+</style>
+</head>
+<body>
+	<div class="panel">
+		<div class="header1">Gamepad Streamer</div>
+		<div class="menu">
+			<div id="loading">
+				<div class="loader"></div>
+			</div>
+
+			Template
+			<select id="templates">
+			</select>
+			
+			Gamepad
+			<select id="gamepads">
+			</select>
+
+			Copy following url into OBS layer:
+			<input id="url" readonly="true"></input>
+		</div>
+	</div>
+</body>
+</html>
