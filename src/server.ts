@@ -6,6 +6,8 @@ import path from "path";
 import puppeteer from "puppeteer";
 import { Server as SocketIOServer } from "socket.io";
 
+const basePath = (<any>process).pkg ? path.dirname(process.execPath) : __dirname;
+
 function getLocalNetworks(): { name: string, ip: string }[] {
 	const interfaces = networkInterfaces();
 	const networks = [];
@@ -26,7 +28,7 @@ process.on("uncaughtException", async (e) => {
 	const dateString = (new Date()).toISOString().replace(/[:T-]/g, "_").split(".")[0];
 	const crashFilename = `crash_${dateString}.txt`;
   
-	const folderPath = path.join(__dirname, "errors");
+	const folderPath = path.join(basePath, "errors");
 	const filePath = path.join(folderPath, crashFilename);
   
 	try {
@@ -44,7 +46,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new SocketIOServer(server);
 
-app.use(express.static(path.join(__dirname, "templates", "assets")));
+app.use(express.static(path.join(basePath, "templates", "assets")));
 
 app.get("/:templateName?", async (req, res) => {
 	const { templateName } = req.params;
@@ -55,7 +57,7 @@ app.get("/:templateName?", async (req, res) => {
 		return;
 	}
 
-	const templatePath = path.join(__dirname, "templates", `${templateName}.html`);
+	const templatePath = path.join(basePath, "templates", `${templateName}.html`);
 	try {
 		await fs.access(templatePath);
 		const content = await fs.readFile(templatePath, "utf8");
@@ -66,7 +68,7 @@ app.get("/:templateName?", async (req, res) => {
 });
 
 io.on("connection", async (socket) => {
-	const templatePath = path.join(__dirname, "templates");
+	const templatePath = path.join(basePath, "templates");
 	const files = await fs.readdir(templatePath);
 	const templates = files.filter(file => path.extname(file) === ".html").map(f => f.replace(".html", ""));
 
@@ -85,6 +87,7 @@ server.listen(3136, () => {
 		localNetworks.forEach(network => {
 			console.log(`- ${network.name}: http://${network.ip}:3136`);
 		});
+		console.log(`- http://localhost:3136`);
 	}
 });
 
