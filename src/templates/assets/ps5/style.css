@@ -1,0 +1,272 @@
+.controller {
+    background: url(White_SkinNo_Buttons.png);
+    height: 700px;
+    width: 1200px;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.disconnected div {
+    display: none;
+}
+
+ .triggers {
+    width: 598px;
+    height: 90px;
+    position: absolute;
+    left: 299px;
+    top: 38px;
+}
+
+ .trigger {
+    width: 99px;
+    height: 100%;
+    background: url(Trigger_Pressed.png);
+    opacity: 0;
+}
+
+ .trigger.left {
+    float: left;
+}
+
+ .trigger.right {
+    float: right;
+    background-position-x: 99px;
+}
+
+ .bumper {
+    width: 200px;
+    height: 45px;
+    background: url(Bumper.png) no-repeat;
+    opacity: 0;
+}
+
+ .bumpers {
+    position: absolute;
+    width: 672px;
+    height: 23px;
+    left: 263px;
+    top: 132px;
+}
+
+ .bumper.pressed {
+    opacity: 0.8;
+}
+
+ .bumper.left {
+    float: left;
+}
+
+ .bumper.right {
+    float: right;
+    transform: rotateY(180deg);
+}
+
+ .touchpad {
+    width: 350px;
+    height: 300px;
+    position: absolute;
+    left: 422px;
+    top: 74px;
+}
+
+ .touchpad.pressed {
+    background: url(Touchpad.png) no-repeat center;
+}
+
+ .meta {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 546px;
+    bottom: 264px;
+}
+
+ .meta.pressed {
+    background: url(Home.png) no-repeat center;
+}
+
+ .p0{
+background-position: 0 -6px;
+}
+ .p1{
+background-position: 0 -28px;
+}
+ .p2{
+background-position: 0 -49px;
+}
+ .p3{
+background-position: 0 -70px;
+}*/
+ .arrows {
+    position: absolute;
+    width: 352px;
+    height: 46px;
+    top: 142px;
+    left: 227px;
+}
+
+ .back,  .start {
+    background: url(Select.png);
+    width: 26px;
+    height: 43px;
+    opacity: 0;
+}
+ .start {
+    position: absolute;
+	right: 401px;
+	top: 174px;
+}
+ .back {
+    position: absolute;
+    left: 397px;
+    top: 174px;
+}
+
+.back.pressed, .start.pressed {
+	opacity: 1;
+}
+
+ .back {
+    float: left;
+}
+
+ .start {
+    float: right;
+    background-position: 0px 0;
+}
+
+ .abxy {
+    position: absolute;
+    width: 170px;
+    height: 171px;
+    top: 200px;
+    left: 762px;
+}
+
+ .button {
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    background: url(FaceButtons.png);
+}
+
+.button.pressed {
+    background-position-y: 55px;
+}
+
+ .a {
+    background-position: 0 0;
+    bottom: 0px;
+    left: 58px;
+}
+
+ .b {
+    background-position: -57px 0;
+    top: 57px;
+    right: -3px;
+}
+
+ .x {
+    background-position: -113px 0;
+    top: 57px;
+}
+
+ .y {
+    background-position: 55px 0;
+    left: 58px;
+    bottom: 119px;
+}
+
+ .sticks {
+    position: absolute;
+    width: 364px;
+    height: 105px;
+    top: 348px;
+    left: 422px;
+}
+
+ .stick {
+    position: absolute;
+    background: url(Sticks.png);
+    height: 94px;
+    width: 94px;
+}
+
+ .stick.pressed.left {
+    background-position-x: -96px;
+}
+
+ .stick.pressed.right {
+    background-position-x: -192px;
+}
+
+ .stick.left {
+    top: 0;
+    left: 0;
+}
+
+ .stick.right {
+    top: calc(100% - 105px);
+    left: calc(100% - 105px);
+}
+
+ .dpad {
+    position: absolute;
+    width: 125px;
+    height: 126px;
+    top: 220px;
+    left: 286px;
+}
+
+ .face {
+    background: url(Dpad.png);
+    position: absolute;
+}
+
+ .face.up,  .face.down {
+    width: 37px;
+    height: 52px;
+}
+
+ .face.left,  .face.right {
+    width: 52px;
+    height: 40px;
+}
+
+ .face.up {
+    left: 44px;
+    top: 0;
+    background-position: -37px 0px;
+}
+
+ .face.down {
+    left: 44px;
+    bottom: 0;
+    background-position: 0px 0;
+}
+
+ .face.left {
+    top: 45px;
+    left: 0;
+    background-position: 104px 0;
+}
+
+ .face.right {
+    top: 45px;
+    right: 0px;
+    background-position: 52px 0;
+}
+
+ .face.pressed {
+    background-position-y: 52px;
+}
+
+.white .back, .start {
+    background-image: url(Start.png);
+    width: 26px;
+    height: 43px;
+}

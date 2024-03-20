@@ -44,6 +44,8 @@ const app = express();
 const server = http.createServer(app);
 const io = new SocketIOServer(server);
 
+app.use(express.static(path.join(__dirname, "templates", "assets")));
+
 app.get("/:templateName?", async (req, res) => {
 	const { templateName } = req.params;
 	if(!templateName) {
@@ -55,7 +57,6 @@ app.get("/:templateName?", async (req, res) => {
 
 	const templatePath = path.join(__dirname, "templates", `${templateName}.html`);
 	try {
-		console.log(templatePath);
 		await fs.access(templatePath);
 		const content = await fs.readFile(templatePath, "utf8");
 		res.send(content);
