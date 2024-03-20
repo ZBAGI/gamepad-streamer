@@ -3,6 +3,7 @@ import fs from "fs/promises"; // Using fs/promises for the Promise-based fs modu
 import http from "http";
 import { EOL, networkInterfaces } from "os";
 import path from "path";
+import puppeteer from "puppeteer";
 import { Server as SocketIOServer } from "socket.io";
 
 function getLocalNetworks(): { name: string, ip: string }[] {
@@ -68,11 +69,7 @@ io.on("connection", async (socket) => {
 	const files = await fs.readdir(templatePath);
 	const templates = files.filter(file => path.extname(file) === ".html").map(f => f.replace(".html", ""));
 
-	const state = {
-		templates,
-		gamepads: [1,2,3]
-	};
-	socket.emit("info", state);
+	socket.emit("templates", templates);
 });
 
 server.listen(3136, () => {
@@ -89,3 +86,32 @@ server.listen(3136, () => {
 		});
 	}
 });
+
+async function startGamepadMonitoring() {
+	const browser = await puppeteer.launch();
+	const page = await browser.newPage();
+	await page.exposeFunction("updateState", (state: any[]) => {
+		io.emit("state", state.filter(gamepad => gamepad != null));
+	});
+
+	await page.evaluate(() => {
+		setInterval(() => {
+			const gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
+			// Clone state in order to pass it into node context
+			const state = Array.from(gamepads).map(gamepad => {
+				return gamepad ? {
+					id: gamepad.id,
+					index: gamepad.index,
+					buttons: gamepad.buttons.map(button => ({
+						pressed: button.pressed,
+						value: button.value
+					})),
+					axes: gamepad.axes.slice()
+				} : null;
+			});
+			(window as any).updateState(state);
+		}, 50);
+	});
+}
+
+startGamepadMonitoring();
