@@ -5,7 +5,7 @@ uses [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_AP
 It integrates seamlessly with streaming software for live gamepad input showcasing.
 
 # Note
-This tool is intended for setups where gameplay and streaming occur on separate PCs. For single PC setups, consider using [Gamepad Viewer](https://gamepadviewer.com/)https://gamepadviewer.com/.
+This tool is intended for setups where gameplay and streaming occur on separate PCs. For single PC setups, consider using [Gamepad Viewer](https://gamepadviewer.com/).
 
 # Usage
 1. [Download the latest release.](https://github.com/ZBAGI/gamepad-streamer/releases)
