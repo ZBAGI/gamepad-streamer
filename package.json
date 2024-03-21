@@ -11,7 +11,8 @@
 		],
 		"outputPath": "./dist/release",
 		"assets": [
-			"./dist/index.html"
+			"./dist/index.html",
+			"./node_modules/socket.io/client-dist/socket.io.js"
 		]
 	},
 	"scripts": {
