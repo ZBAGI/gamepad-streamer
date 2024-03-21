@@ -15,6 +15,6 @@ This tool is intended for setups where gameplay and streaming occur on separate 
 # Screenshoots
 ![image](https://github.com/ZBAGI/gamepad-streamer/assets/26273080/9993b928-d0ab-4a16-bd1d-bbfddd49be2c)
 
-![image](https://github.com/ZBAGI/gamepad-streamer/assets/26273080/ff7d928b-89ed-49e4-8420-92453f0dca3c)
+![image](https://github.com/ZBAGI/gamepad-streamer/assets/26273080/d8e48095-308b-4b60-b0be-969fd903273b)
 
 ![image](https://github.com/ZBAGI/gamepad-streamer/assets/26273080/96219c85-9e04-41cf-8526-bdbc97649d90)
