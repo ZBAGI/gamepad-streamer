@@ -2,7 +2,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script src="/socket.io/socket.io.js"></script>
+	<script src="../common.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", () => {
 			const buttons = [];
@@ -31,24 +33,9 @@
 			buttons[16] = document.querySelector(".meta");
 			buttons[17] = document.querySelector(".touchpad");
 			
-			const urlParams = new URLSearchParams(window.location.search);
-			const gamepadIndex = urlParams.get("gamepad");
-
-			io().on("state", (state) => {
-				const gamepad = state[gamepadIndex];
-				if(!gamepad)
-					return; // disconnected
-
-				buttons.forEach((button, index) => {
-					if(typeof button == "function") 
-						button(gamepad.buttons[index].value);
-					else
-						button.classList.toggle("pressed", gamepad.buttons[index]?.pressed);
-				});
-			});
+			io().on("state", updateDisplayLayer(buttons));
 		});
 	</script>
-	<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
 	<div class="controller">
