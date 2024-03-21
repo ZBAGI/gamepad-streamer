@@ -87,7 +87,6 @@ server.listen(3136, () => {
 		localNetworks.forEach(network => {
 			console.log(`- ${network.name}: http://${network.ip}:3136`);
 		});
-		console.log(`- http://localhost:3136`);
 	}
 });
 
