@@ -239,25 +239,25 @@ background-position: 0 -70px;
 
  .face.up {
     left: 44px;
-    top: 0;
+    top: -10px;
     background-position: -37px 0px;
 }
 
  .face.down {
     left: 44px;
-    bottom: 0;
+    bottom: -10px;
     background-position: 0px 0;
 }
 
  .face.left {
     top: 45px;
-    left: 0;
+    left: -10px;
     background-position: 104px 0;
 }
 
  .face.right {
     top: 45px;
-    right: 0px;
+    right: -10px;
     background-position: 52px 0;
 }
 

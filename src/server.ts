@@ -70,7 +70,13 @@ app.get("/:templateName?", async (req, res) => {
 io.on("connection", async (socket) => {
 	const templatePath = path.join(basePath, "templates");
 	const files = await fs.readdir(templatePath);
-	const templates = files.filter(file => path.extname(file) === ".html").map(f => f.replace(".html", ""));
+	const templates = await Promise.all(files.filter(file => path.extname(file) === ".html").map(async (f) => {
+		const fullPath = path.join(templatePath, f);
+		const content = await fs.readFile(fullPath, "utf8");
+		const match = content.match(/^\s*<!--\s*(.*?)\s*-->/);
+		const description = match ? match[1] : null;
+		return { id: f.replace(".html", ""), description: description };
+	}));
 
 	socket.emit("templates", templates);
 });
@@ -94,7 +100,7 @@ async function startGamepadMonitoring() {
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
 	await page.exposeFunction("updateState", (state: any[]) => {
-		io.emit("state", state.filter(gamepad => gamepad != null));
+		io.emit("state", state);
 	});
 
 	await page.evaluate(() => {

@@ -8,23 +8,28 @@
 	document.addEventListener("DOMContentLoaded", () => {
 		const loadingElement = document.getElementById('loading');
 		const templatesSelect = document.getElementById('templates');
+		const templateDescriptionElement = document.getElementById('template-info');
 		const gamepadSelect = document.getElementById('gamepads');
 		const urlInput = document.getElementById('url');
 
+		let templates = [];
 		const socket = io();
-		socket.on("templates", (templates) => {
+		
+		socket.on("templates", (t) => {
 			templatesSelect.innerHTML = "";
+			templates = t;
 
-			templates.forEach((template) => {
-				const option = new Option(template, template);
+			templates.forEach((template, index) => {
+				const option = new Option(template.id, index);
 				templatesSelect.appendChild(option);
 			});
 
-			updateUrl();
+			onUpdate();
 		});
 
 		let lastGamepadState = "";
 		socket.on("state", (gamepads) => {
+			gamepads = gamepads.filter(gamepad => gamepad != null);
 			const thisGamepadState = gamepads.map(gamepad => gamepad.index + gamepad.id).join("");
 			if(thisGamepadState == lastGamepadState)
 				return;
@@ -38,24 +43,32 @@
 				gamepadSelect.appendChild(option);
 			});
 
-			updateUrl();
+			onUpdate();
 		});
 
+		templatesSelect.addEventListener('change', onUpdate);
+		gamepadSelect.addEventListener('change', onUpdate);
 
-		function updateUrl() {
+		function onUpdate() {
 			if(!templatesSelect.value || !gamepadSelect.value) {
 				loadingElement.style.display = 'flex';
+				templateDescriptionElement.style.display = 'none';
 				return;
 			}
 
+			const selectedTemplate = templates[templatesSelect.value];
+			if(selectedTemplate.description) {
+				templateDescriptionElement.innerHTML = selectedTemplate.description;
+				templateDescriptionElement.style.display = 'block';
+			} else {
+				templateDescriptionElement.style.display = 'none';
+			}
+
 			const baseUrl = window.location.href.split('?')[0];
-			const newUrl = `${baseUrl}${templatesSelect.value}?gamepad=${gamepadSelect.value}`;
+			const newUrl = `${baseUrl}${selectedTemplate.id}?gamepad=${gamepadSelect.value}`;
 			urlInput.value = newUrl;
 			loadingElement.style.display = 'none';
 		}
-
-		templatesSelect.addEventListener('change', updateUrl);
-		gamepadSelect.addEventListener('change', updateUrl);
 	});
 </script>
 <style>
@@ -134,6 +147,11 @@
 		font-size: 110%;
 		text-align: center;
 	}
+	#template-info {
+		margin-top:-18px;
+		margin-bottom:20px;
+		display: none;
+	}
 </style>
 </head>
 <body>
@@ -148,15 +166,15 @@
 				</div>
 			</div>
 
-			Template
+			<b>Template</b>
 			<select id="templates">
 			</select>
-			
-			Gamepad
+			<div id="template-info"></div>
+			<b>Gamepad</b>
 			<select id="gamepads">
 			</select>
 
-			Copy following url into OBS layer:
+			<b>Copy following url into OBS layer:</b>
 			<input id="url" readonly="true"></input>
 		</div>
 	</div>
