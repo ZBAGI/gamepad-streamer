@@ -34,16 +34,11 @@
 			const urlParams = new URLSearchParams(window.location.search);
 			const gamepadIndex = urlParams.get("gamepad");
 
-			let lastStatus = "";
 			io().on("state", (state) => {
 				const gamepad = state[gamepadIndex];
 				if(!gamepad)
 					return;
 
-				const thisStatus = gamepad.buttons.map(b => b.pressed ? "1" : "0").join("");
-				if(lastStatus == thisStatus)
-					return;
-				lastStatus = thisStatus;
 				console.log(gamepad);
 				buttons.forEach((button, index) => {
 					if(typeof button == "function") 
