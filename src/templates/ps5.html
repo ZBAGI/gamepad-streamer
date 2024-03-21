@@ -37,9 +37,8 @@
 			io().on("state", (state) => {
 				const gamepad = state[gamepadIndex];
 				if(!gamepad)
-					return;
+					return; // disconnected
 
-				console.log(gamepad);
 				buttons.forEach((button, index) => {
 					if(typeof button == "function") 
 						button(gamepad.buttons[index].value);
