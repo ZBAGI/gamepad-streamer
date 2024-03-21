@@ -1,0 +1,87 @@
+<!--
+Recommended layer size is <b>800x625</b> for full view or <b>675x430</b> for minimalistic.
+-->
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="../common.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+			const buttons = [];
+
+			buttons[0] = document.querySelector(".button.a");
+			buttons[1] = document.querySelector(".button.b");
+			buttons[2] = document.querySelector(".button.x");
+			buttons[3] = document.querySelector(".button.y");
+
+			buttons[4] = document.querySelector(".bumper.left");
+			buttons[5] = document.querySelector(".bumper.right");
+			buttons[6] = (value) => { document.querySelector(".trigger.left").style.opacity = value }
+			buttons[7] = (value) => { document.querySelector(".trigger.right").style.opacity = value }
+
+			buttons[8] = document.querySelector(".back");
+			buttons[9] = document.querySelector(".start");
+
+			buttons[10] = document.querySelector(".stick.left");
+			buttons[11] = document.querySelector(".stick.right");
+
+			buttons[12] = document.querySelector(".face.up");
+			buttons[13] = document.querySelector(".face.down");
+			buttons[14] = document.querySelector(".face.left");
+			buttons[15] = document.querySelector(".face.right");
+
+			buttons[16] = document.querySelector(".meta");
+			buttons[17] = document.querySelector(".touchpad");
+			
+			io().on("state", updateDisplayLayer(buttons));
+		});
+	</script>
+</head>
+<body>
+	<div class="controller">
+		<div class="triggers">
+			<span class="trigger left"></span>
+			<span class="trigger right"></span>
+			<span class="trigger-button left"></span>
+			<span class="trigger-button right"></span>
+			<span class="clear"></span>
+		</div>
+		<div class="bumpers">
+			<span class="bumper left"></span>
+			<span class="bumper right"></span>
+			<span class="clear"></span>
+		</div>
+		<div class="touchpad"></div>
+		<div class="meta"></div>
+		<div class="arrows">
+			<span class="back"></span>
+			<span class="start"></span>
+			<span class="clear"></span>
+		</div>
+		<div class="abxy">
+			<span class="button a"></span>
+			<span class="button b"></span>
+			<span class="button x"></span>
+			<span class="button y"></span>
+		</div>
+		<div class="sticks">
+			<span class="stick left" style="margin-left: 0px; margin-top: 0px; transform: rotateX(0deg) rotateY(0deg);"></span>
+			<span class="stick right" style="margin-left: 0px; margin-top: 0px; transform: rotateX(0deg) rotateY(0deg);"></span>
+		</div>
+		<div class="wheels">
+			<span class="wheel left" style="transform: rotate(0deg);"></span>
+			<span class="wheel right" style="transform: rotate(0deg);"></span>
+		</div>
+		<div class="dpad">
+			<span class="face up"></span>
+			<span class="face down"></span>
+			<span class="face left"></span>
+			<span class="face right"></span>
+		</div>
+		<div class="fstick"></div>
+	</div>
+</body>
+</html>

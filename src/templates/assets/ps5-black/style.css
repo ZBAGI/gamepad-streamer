@@ -1,5 +1,5 @@
 .controller {
-	background: url(White_SkinNo_Buttons.png);
+	background: url(controller.png);
 	height: 700px;
 	width: 1200px;
 
@@ -128,7 +128,7 @@ background-position: 0 -70px;
 	position: absolute;
 	width: 55px;
 	height: 55px;
-	background: url(FaceButtons.png);
+	background: url(face.svg);
 }
 .button.pressed {
 	background-position-y: 55px;
@@ -187,7 +187,7 @@ background-position: 0 -70px;
 	left: 286px;
 }
 .face {
-	background: url(Dpad.png);
+	background: url(dpad.svg);
 	position: absolute;
 }
 .face.up,  .face.down {
@@ -199,22 +199,22 @@ background-position: 0 -70px;
 	height: 40px;
 }
 .face.up {
-	left: 44px;
+	left: 43px;
 	top: -10px;
 	background-position: -37px 0px;
 }
 .face.down {
-	left: 44px;
+	left: 43px;
 	bottom: -10px;
 	background-position: 0px 0;
 }
 .face.left {
-	top: 45px;
-	left: -10px;
+	top: 44px;
+	left: -14px;
 	background-position: 104px 0;
 }
 .face.right {
-	top: 45px;
+	top: 44px;
 	right: -10px;
 	background-position: 52px 0;
 }
