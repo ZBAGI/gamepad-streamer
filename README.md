@@ -11,3 +11,10 @@ This tool is intended for setups where gameplay and streaming occur on separate 
 1. [Download the latest release.](https://github.com/ZBAGI/gamepad-streamer/releases)
 2. Run the executable suitable for your operating system.
 3. The console will display suggested URLs that you can visit on other devices within your network. Visit the indicated page and follow the instructions provided.
+
+# Screenshoots
+![image](https://github.com/ZBAGI/gamepad-streamer/assets/26273080/9993b928-d0ab-4a16-bd1d-bbfddd49be2c)
+
+
+![image](https://github.com/ZBAGI/gamepad-streamer/assets/26273080/ff7d928b-89ed-49e4-8420-92453f0dca3c)
+
